@@ -60,7 +60,11 @@ Polynomial::Polynomial(std::string _as_string) {
 }
 
 std::ostream& operator<<(std::ostream& os, const Polynomial& pl) {
-	os << pl.as_string;
+	
+	if (pl.as_string == "0x0y0z0")
+		os << "0";
+	else
+	  os << pl.as_string; 
 	return os;
 }
 
@@ -104,10 +108,10 @@ void Polynomial::reduce() {
 
 void Polynomial::string_edit() {
 	std::string result;
-	std::string tmp;
+	std::string tmp;	
 	for (int i = 0; i < monoms.size(); i++) {
 		if (monoms[i].get_coeff() == 0)
-			monoms.remove(i);
+			;
 		else {
 			if (i != 0 && monoms[i].get_coeff() > 0)
 				result += '+';
@@ -137,7 +141,7 @@ void Polynomial::string_edit() {
 		}
 	}
 	if (result.empty())
-		result = "0";
+		result = "0x0y0z0";
 	as_string = result;
 }
 
