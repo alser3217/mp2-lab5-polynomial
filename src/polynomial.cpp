@@ -106,32 +106,38 @@ void Polynomial::string_edit() {
 	std::string result;
 	std::string tmp;
 	for (int i = 0; i < monoms.size(); i++) {
-		if (i != 0 && monoms[i].get_coeff() > 0)
-			result += '+';
-		if (monoms[i].get_coeff() != 1) {
-			std::ostringstream ss;
-			ss << monoms[i].get_coeff();
-			result += ss.str();
-		}
-		{
-			result += 'x';
-			std::ostringstream ss;
-			ss << monoms[i].get_degree() / 100;
-			result += ss.str();
-		}
-		{
-			result += 'y';
-			std::ostringstream ss;
-			ss << (monoms[i].get_degree() / 10) % 10;
-			result += ss.str();
-		}
-		{
-			result += 'z';
-			std::ostringstream ss;
-			ss << monoms[i].get_degree() % 10;
-			result += ss.str();
+		if (monoms[i].get_coeff() == 0)
+			monoms.remove(i);
+		else {
+			if (i != 0 && monoms[i].get_coeff() > 0)
+				result += '+';
+			if (monoms[i].get_coeff() != 1) {
+				std::ostringstream ss;
+				ss << monoms[i].get_coeff();
+				result += ss.str();
+			}
+			{
+				result += 'x';
+				std::ostringstream ss;
+				ss << monoms[i].get_degree() / 100;
+				result += ss.str();
+			}
+			{
+				result += 'y';
+				std::ostringstream ss;
+				ss << (monoms[i].get_degree() / 10) % 10;
+				result += ss.str();
+			}
+			{
+				result += 'z';
+				std::ostringstream ss;
+				ss << monoms[i].get_degree() % 10;
+				result += ss.str();
+			}
 		}
 	}
+	if (result.empty())
+		result = "0";
 	as_string = result;
 }
 
