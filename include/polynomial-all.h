@@ -5,6 +5,4 @@
 #include "polynomial.h"
 #include "monom.h"
 
-
-
 #endif
